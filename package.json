@@ -1,31 +1,24 @@
 {
-  "name": "fc2blog_tasy_simple_template",
+  "name": "template",
   "version": "0.0.0",
-  "description": "simple blog template for FC2 Blog",
+  "description": "template",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pso2tasy/fc2blog_tasy_simple_template.git"
-  },
-  "keywords": [
-    "fc2",
-    "blog",
-    "template"
-  ],
-  "author": "pso2tasy",
+  "author": "user",
   "license": "Public Domain",
-  "bugs": {
-    "url": "https://github.com/pso2tasy/fc2blog_tasy_simple_template/issues"
-  },
-  "homepage": "https://github.com/pso2tasy/fc2blog_tasy_simple_template",
+  "bugs": {},
+  "homepage": "",
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-jade": "^1.0.0",
     "gulp-stylus": "^2.0.1",
+    "gulp-auto-restart": "^0.0.1",
+    "gulp-replace-task": "^0.1.0",
     "jade": "^1.9.2",
-    "stylus": "^0.50.0"
+    "stylus": "^0.50.0",
+    "browser-sync": "~2.2.1",
+    "minimist": "~1.1.0"
   }
 }

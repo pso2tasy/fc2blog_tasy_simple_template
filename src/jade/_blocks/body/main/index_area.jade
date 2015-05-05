@@ -1,0 +1,40 @@
+// index_area
+article.activity_list
+  //- エントリーリスト
+  section.widget.recent_entry_list
+    h1 Recent Blog Entries
+    .table
+      // topentry
+      .row.clearfix
+        .thumbnail
+          a(href!="<%topentry_link>")
+            <%topentry_image_72>
+        .text
+          a(href!="<%topentry_link>")
+            .meta.color_font_main <%topentry_year>/<%topentry_month>/<%topentry_day>
+            .title <%topentry_title>
+            .meta.comment_num.color_font_main <%topentry_comment_num> Comments
+      // /topentry
+    footer.clearfix
+
+  //- 最新コメントリスト
+  section.widget.recent_comment_list
+    h1 Recent Blog Comments
+    table.table
+      // rcomment
+      tr
+        td.meta
+          <%rcomment_year>/<%rcomment_month>/<%rcomment_day>
+        td.meta
+          <%rcomment_name>
+        td.meta.color_font_main
+          a(href!="<%rcomment_link>#comment") <%rcomment_etitle>
+      // /rcomment
+    footer.clearfix
+
+  hr.both
+
+  include ../widget/tumblr
+  include ../widget/link_list
+// /index_area
+//- vim:set expandtab fenc=utf8 sw=2 sts-2

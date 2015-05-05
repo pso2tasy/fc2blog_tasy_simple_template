@@ -1,0 +1,48 @@
+//- topentry内で呼び出すこと
+section.comment#comment
+  //comment
+  .body
+    <%comment_body>
+  footer
+    | <%comment_year>/<%comment_month>/<%comment_day> <%comment_hour>:<%comment_minute> : <%comment_name> <%comment_url+str>
+    // comment_edit
+    a(href!="<%comment_edit_link>") Edit
+    // /comment_edit
+  // /comment
+
+  // allow_comment
+section.comment_form
+  form#comment_form(action!="http://pso2tasy.blog.fc2.com/blog-entry-<%pno>.html" method="post" name="comment_form")
+    input(name="comment[no]", value!="<%pno>", type="hidden")
+    input(name="mode", value="regist", type="hidden")
+
+    dl
+      dt
+        label(for="name") Name
+      dd
+        input.name(name="comment[name]", value!="<%cookie_name>", type="text")
+      dt
+        label(for="mail") Mail
+      dd
+        input.mail(name="comment[mail]", value!="<%cookie_mail>", type="text")
+      dt
+        label(for="url") URL
+      dd
+        input.url(name="comment[url]", value!="<%cookie_url>", type="text")
+      dt
+        label(for="comment") Comment
+      dd
+        textarea.comment(name="comment[body]")
+      dt
+        label(for="pass") Password
+      dd
+        input.password(name="comment[pass]", type="password")
+      dt
+        label(for="private") Private
+      dd
+        input.private(name="comment[himitu]", type="checkbox")
+      
+      input.submit(value="送信", type="submit")
+  
+  // /allow_comment
+

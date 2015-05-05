@@ -1,0 +1,99 @@
+//- tumblr
+script(type="text/javascript", src="http://www.google.com/jsapi")
+//- script(type="text/javascript", src="http://blog-imgs-78.fc2.com/p/s/o/pso2tasy/tumblrfeed.js")
+#tumblrfeed.widget.recent_entry_list
+  h1 Recent Tumblr Entries
+  #feed.table
+  footer.clearfix
+
+script#tumblrfeed_script(type="text/javascript").
+  //APIのモジュールを読み込み
+  google.load("feeds", "1");
+            
+  var initialize = function() {
+    var feedUrl = "http://pso2tasy.tumblr.com/rss";
+    var numEntries = 5; //エントリの表示数の設定
+    var expirationDate = 30; // 何日以内のものを読み込むか
+
+    var now = new Date().getTime();
+    var feed = new google.feeds.Feed(feedUrl + "?" + parseInt(now / 600 / 1000).toString());// 600秒ごとに違うURLにすることでブラウザキャッシュを回避
+  
+    feed.setNumEntries(numEntries);
+  
+    //関数の定義
+    feed.load(function(result) {
+      var htmlstr = "";
+      if (!result.error) {
+        //読み込みが成功したときの処理
+        var container = document.getElementById("feed");
+        for (var i = 0; i < result.feed.entries.length; i++) {
+  
+          var entry = result.feed.entries[i];
+  
+          //日付の判定
+          var pdate = new Date(entry.publishedDate);
+          if(now - pdate.getTime() > 1000 * 60 * 60 * 24 * expirationDate) break;
+    
+          var s = document.createElement("div");
+          s.className = "row clearfix";
+          var thumb =createThumbnail(entry);
+          s.appendChild(thumb);
+  
+          var text = createText(entry);
+          s.appendChild(text);
+          
+          container.appendChild(s);
+        }
+      }
+    });
+  }
+  var createDate = function(entry) {
+    var pdate = new Date(entry.publishedDate); //Dateクラス
+  
+    var pyear  = pdate.getFullYear();  //年
+    var pmonth = pdate.getMonth() + 1; //月
+    var pday   = pdate.getDate();      //日
+  
+    //日付を2桁表示に変更
+    if (pyear < 2000) pyear += 1900;
+    if (pmonth < 10) { "0" + pmonth;}
+    if (pday < 10) {pday = "0" + pday;}
+  
+    return pyear + "/" + pmonth + "/" + pday + " ";
+  };
+  var createThumbnail = function(entry) {
+    var imgsrc = entry.content.match(/src="(.*?)"/im);
+    var container = document.createElement("div");
+    container.className = "thumbnail";
+    var anchor = document.createElement("a");
+    anchor.setAttribute("href", entry.link);
+    if(Array.isArray(imgsrc)) {
+      var thumbimg = document.createElement("img");
+      thumbimg.setAttribute("src", imgsrc[1]);
+      anchor.appendChild(thumbimg);
+    }
+    container.appendChild(anchor);
+    return container;
+  };
+  var createText = function(entry) {
+    var text = document.createElement("div");
+    text.className = "text";
+    
+    var anchor = document.createElement("a");
+    anchor.setAttribute("href", entry.link);
+
+    var date = document.createElement("div");
+    date.className = "meta color_font_main";
+    date.innerHTML = createDate(entry);
+    anchor.appendChild(date);
+
+    var title = document.createElement("div");
+    title.className = "title";
+    title.innerHTML = entry.title;
+    anchor.appendChild(title);
+
+    text.appendChild(anchor);
+    return text;
+  };
+  google.setOnLoadCallback(initialize);
+

@@ -1,19 +1,37 @@
 //- blue = #7080ff
 //- red / blue = #f05030 / #30d0cf
-
+//- hr
+//-   border 0
+//-   height: 1px;
+//-   width 100%
+//-   background-image linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0))
+recentEntryListLogo(bgColor, borderColor, logoUrl)
+  h1:before
+    content ""
+    display inline-block
+    background url(logoUrl) no-repeat scroll center bgColor
+    width  .9em
+    height .9em
+    border-radius 5px
+    border 0.12em solid borderColor
+    vertical-align -.2em
+    margin  0 .2em 0 0
+    padding 0
 @import "_lib/reset.styl"
 .clearfix
   min-height 0px
 
 //- http://ironodata.info/rgb.php?color=3B3B3B
-//-blankColor    =  #dedede
 blankColor    =  #b3b3b3
+subColor       = #e6e6e6
 accentColorBlue = #30d0cf
 accentColorRed = #f05030
-mainColor       = #fff
+
+mainColor       = #ffffff
 fontMainColor  = #3b3b3b
-subColor        = #3b3b3b
-fontSubColor   = #fff
+mainColorR        = #3b3b3b
+fontMainColorR   = #fff
+
 fontFamily = "メイリオ","Meiryo",Verdana,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Osaka",sans-serif
 contentWidth = 1040px
 mainWidth = 960px
@@ -40,10 +58,10 @@ body
     margin           0 auto
     h1.not_index_area, h1.index_area
       a
-        color blankColor
+        color fontMainColorR
       margin 0 auto
       text-align center
-      background-color subColor
+      background-color mainColorR
     h1.not_index_area
       padding 1em 0
       font-size 2.2em
@@ -59,10 +77,10 @@ body
     //- container footer
     footer
       padding 1em ((contentWidth+(-1 * mainWidth))/2)
-      background-color subColor
-      color            fontSubColor
+      background-color mainColorR
+      color            fontMainColorR
       a
-        color            fontSubColor
+        color            fontMainColorR
       .copyright
         margin 0 0 1em 0
         a
@@ -81,6 +99,7 @@ body
             
     //- 記事中で用いるもの
     .activity_list
+      fontSizeH1=2.2em
       font-size 1.3em
       background-color mainColor
       footer
@@ -88,27 +107,28 @@ body
         pdding 0
       hr
         border 0
-        //- height: 1px;
-        //- width 100%
-        //- background-image linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0))
       .link_list
         float left
+        recentEntryListLogo(mainColor, blankColor, "")
         .table
           .row
-            margin .5em 0
-            padding-left 1em
+            padding .2em .3em .2em fontSizeH1
+      #tumblrfeed
+        recentEntryListLogo(accentColorBlue, accentColorBlue, "http://blog-imgs-78.fc2.com/p/s/o/pso2tasy/tumblr_logo_white_24.png")
       .recent_entry_list
         float left
+        recentEntryListLogo(accentColorRed, accentColorRed, "")
+        //- recentEntryListLogo(accentColorRed, "http://blog-imgs-53.fc2.com/p/s/o/pso2tasy/twittericon00.jpg")
         .table
           .row
             margin .5em 0
+            padding-left fontSizeH1
             .thumbnail
-              margin-left 1em
               float left
               overflow hidden
               height 72px
               width  72px
-              background-color blankColor
+              background-color subColor
               border-radius 10px
               img
                 min-height 72px
@@ -117,22 +137,24 @@ body
                 max-width  72px
             .text
               width 300px
-              line-height 1.6
               padding-left 1em
               float left
               vertical-align bottom
               .title
+                width @width
+                overflow hidden
                 font-size 1.2em
-              .comment_num
-                text-align right
+                white-space nowrap
+                text-overflow  ellipsis
       .recent_comment_list
         float left
+        recentEntryListLogo(mainColor, blankColor, "")
         table
           tr
             td
-              padding .5em .3em
+              padding .2em .3em
             td:first-child
-              padding-left 1em
+              padding-left fontSizeH1
     .entry
       background-color blankColor
       header
@@ -166,16 +188,16 @@ body
             margin-bottom 2em
             line-height 1.6
           p.obj
-            background-color subColor
-            color fontSubColor
+            background-color mainColorR
+            color fontMainColorR
             padding-bottom .5em
             margin-bottom 1em
             img
               max-width  mainWidth
               max-height mainWidth
           div.obj
-            background-color subColor
-            color fontSubColor
+            background-color mainColorR
+            color fontMainColorR
             padding-bottom .5em
             margin-bottom 1em
             width auto
@@ -229,7 +251,6 @@ body
           margin-bottom 2em
       .comment_form
         background-color mainColor
-        border-bottom 1px solid subColor
         padding 1em ((contentWidth+(-1 * mainWidth))/2)
         font-size 1.3em
       footer
@@ -251,9 +272,13 @@ body
             border 0
     //- container aside
     aside
-      background-color mainColor !important
+      padding 2em ((contentWidth+(-1 * mainWidth))/2) 1em ((contentWidth+(-1 * mainWidth))/2)
+      background-color subColor
       .widget_area
-        padding 0 ((contentWidth+(-1 * mainWidth))/2) 1em ((contentWidth+(-1 * mainWidth))/2)
+        .widget
+          width (widgetWidth/2)
+          h1
+            background-color subColor
         a
           color accentColorBlue
         hr
@@ -311,7 +336,7 @@ body
         .row
           margin .5em 0
           .thumbnail
-            background-color blankColor
+            background-color subColor
             border-radius 5px
             overflow hidden
             margin-left 1em

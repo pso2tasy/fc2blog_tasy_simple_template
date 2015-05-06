@@ -13,9 +13,12 @@ article.activity_list
           a(href!="<%topentry_link>")
             .meta.color_font_main <%topentry_year>/<%topentry_month>/<%topentry_day>
             .title <%topentry_title>
-            .meta.comment_num.color_font_main <%topentry_comment_num> Comments
+            //- .meta.comment_num.color_font_main <%topentry_comment_num> Comments
       // /topentry
     footer.clearfix
+
+  include ../widget/tumblr
+  hr.both
 
   //- 最新コメントリスト
   section.widget.recent_comment_list
@@ -32,9 +35,6 @@ article.activity_list
       // /rcomment
     footer.clearfix
 
-  hr.both
-
-  include ../widget/tumblr
   include ../widget/link_list
 // /index_area
 //- vim:set expandtab fenc=utf8 sw=2 sts-2

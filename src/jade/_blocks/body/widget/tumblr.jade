@@ -22,7 +22,6 @@ script#tumblrfeed_script(type="text/javascript").
   
     //関数の定義
     feed.load(function(result) {
-      var htmlstr = "";
       if (!result.error) {
         //読み込みが成功したときの処理
         var container = document.getElementById("feed");
@@ -34,15 +33,16 @@ script#tumblrfeed_script(type="text/javascript").
           var pdate = new Date(entry.publishedDate);
           if(now - pdate.getTime() > 1000 * 60 * 60 * 24 * expirationDate) break;
     
-          var s = document.createElement("div");
-          s.className = "row clearfix";
-          var thumb =createThumbnail(entry);
-          s.appendChild(thumb);
-  
-          var text = createText(entry);
-          s.appendChild(text);
-          
-          container.appendChild(s);
+          var row = document.createElement("div");
+          row.className = "row clearfix";
+          row.appendChild(createThumbnail(entry));
+          row.appendChild(createText(entry));
+
+          var anchor = document.createElement("a");
+          anchor.setAttribute("href", entry.link);
+          anchor.appendChild(row);
+
+          container.appendChild(anchor);
         }
       }
     });
@@ -65,34 +65,27 @@ script#tumblrfeed_script(type="text/javascript").
     var imgsrc = entry.content.match(/src="(.*?)"/im);
     var container = document.createElement("div");
     container.className = "thumbnail";
-    var anchor = document.createElement("a");
-    anchor.setAttribute("href", entry.link);
     if(Array.isArray(imgsrc)) {
       var thumbimg = document.createElement("img");
       thumbimg.setAttribute("src", imgsrc[1]);
-      anchor.appendChild(thumbimg);
+      container.appendChild(thumbimg);
     }
-    container.appendChild(anchor);
     return container;
   };
   var createText = function(entry) {
     var text = document.createElement("div");
     text.className = "text";
     
-    var anchor = document.createElement("a");
-    anchor.setAttribute("href", entry.link);
-
     var date = document.createElement("div");
     date.className = "meta color_font_main";
     date.innerHTML = createDate(entry);
-    anchor.appendChild(date);
+    text.appendChild(date);
 
     var title = document.createElement("div");
     title.className = "title";
     title.innerHTML = entry.title;
-    anchor.appendChild(title);
+    text.appendChild(title);
 
-    text.appendChild(anchor);
     return text;
   };
   google.setOnLoadCallback(initialize);

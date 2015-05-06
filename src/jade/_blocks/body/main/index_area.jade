@@ -5,13 +5,12 @@ article.activity_list
     h1 Recent Blog Entries
     .table
       // topentry
-      .row.clearfix
-        .thumbnail
-          a(href!="<%topentry_link>")
+      a(href!="<%topentry_link>")
+        .row.clearfix
+          .thumbnail
             <%topentry_image_72>
-        .text
-          a(href!="<%topentry_link>")
-            .meta.color_font_main <%topentry_year>/<%topentry_month>/<%topentry_day>
+          .text
+            .meta <%topentry_year>/<%topentry_month>/<%topentry_day>
             .title <%topentry_title>
             //- .meta.comment_num.color_font_main <%topentry_comment_num> Comments
       // /topentry
@@ -23,15 +22,15 @@ article.activity_list
   //- 最新コメントリスト
   section.widget.recent_comment_list
     h1 Recent Blog Comments
-    table.table
+    .table
       // rcomment
-      tr
-        td.meta
-          <%rcomment_year>/<%rcomment_month>/<%rcomment_day>
-        td.meta
-          <%rcomment_name>
-        td.meta.color_font_main
-          a(href!="<%rcomment_link>#comment") <%rcomment_etitle>
+      a(href!="<%rcomment_link>#comment") 
+        .row
+          .text
+            .meta
+              <%rcomment_year>/<%rcomment_month>/<%rcomment_day> <%rcomment_name>
+            .title
+              <%rcomment_etitle>
       // /rcomment
     footer.clearfix
 

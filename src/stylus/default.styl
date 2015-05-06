@@ -12,11 +12,14 @@ recentEntryListLogo(bgColor, borderColor, logoUrl)
     background url(logoUrl) no-repeat scroll center bgColor
     width  .9em
     height .9em
-    border-radius 5px
-    border 0.12em solid borderColor
+    border-radius 4px
     vertical-align -.2em
     margin  0 .2em 0 0
     padding 0
+    if(logoUrl == "")
+      border 0.12em solid borderColor
+    else
+      border 0.2em solid borderColor
 @import "_lib/reset.styl"
 .clearfix
   min-height 0px
@@ -107,7 +110,7 @@ body
           color fontMainColor
           display block
         a:hover
-          background-color accentColorRed
+          background-color accentColorBlue
       footer
         background-color mainColor
         pdding 0
@@ -117,17 +120,17 @@ body
         float left
         recentEntryListLogo(mainColor, blankColor, "")
         a:hover
-          background-color accentColorBlue
+          background-color accentColorRed
         .table
           .row
-            padding .2em .3em .2em fontSizeH1
+            padding .2em .3em .2em 2em
       #tumblrfeed
-        recentEntryListLogo(accentColorBlue, accentColorBlue, "http://blog-imgs-78.fc2.com/p/s/o/pso2tasy/tumblr_logo_white_24.png")
+        recentEntryListLogo(accentColorRed, accentColorRed, "http://blog-imgs-78.fc2.com/p/s/o/pso2tasy/tumblr_logo_white_24.png")
         a:hover
-          background-color accentColorBlue
+          background-color accentColorRed
       .recent_entry_list
         float left
-        recentEntryListLogo(accentColorRed, accentColorRed, "")
+        recentEntryListLogo(accentColorBlue, accentColorBlue, "")
         .table
           .row
             padding .5em 0 .5em fontSizeH1
@@ -156,13 +159,14 @@ body
                 text-overflow  ellipsis
       .recent_comment_list
         float left
-        recentEntryListLogo(mainColor, blankColor, "")
+        recentEntryListLogo(mainColor, accentColorBlue, "")
         .table
           .row
             .text
-              padding .2em .3em
+              padding .2em .3em .5em 2em
               .title
-                padding-left fontSizeH1
+                padding-left 1.5em
+
     .entry
       background-color blankColor
       header

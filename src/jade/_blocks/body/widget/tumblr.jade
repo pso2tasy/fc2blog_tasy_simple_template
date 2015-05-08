@@ -18,32 +18,40 @@ script#tumblrfeed_script(type="text/javascript").
     var now = new Date().getTime();
     var feed = new google.feeds.Feed(feedUrl + "?" + parseInt(now / 600 / 1000).toString());// 600秒ごとに違うURLにすることでブラウザキャッシュを回避
   
-    feed.setNumEntries(numEntries);
+    feed.setNumEntries(numEntries * 2);
   
     //関数の定義
     feed.load(function(result) {
-      if (!result.error) {
-        //読み込みが成功したときの処理
-        var container = document.getElementById("feed");
-        for (var i = 0; i < result.feed.entries.length; i++) {
-  
-          var entry = result.feed.entries[i];
-  
-          //日付の判定
-          var pdate = new Date(entry.publishedDate);
-          if(now - pdate.getTime() > 1000 * 60 * 60 * 24 * expirationDate) break;
+      if (result.error) {
+        return;
+      }
+      //読み込みが成功したときの処理
+      var container = document.getElementById("feed");
+      for (var i = 0; i < result.feed.entries.length && numEntries > 0; i++) {
+        var entry = result.feed.entries[i];
+
+        //日付の判定
+        var pdate = new Date(entry.publishedDate);
+        if(now - pdate.getTime() > 1000 * 60 * 60 * 24 * expirationDate) break;
     
-          var row = document.createElement("div");
-          row.className = "row clearfix";
-          row.appendChild(createThumbnail(entry));
-          row.appendChild(createText(entry));
+        // 英数字+":"のみの行が一行目の場合は、リブログの可能性が高いので。
+        if(Array.isArray(entry.title.match(/[a-z]+[a-z0-9]*?:\n/i))) continue;
 
-          var anchor = document.createElement("a");
-          anchor.setAttribute("href", entry.link);
-          anchor.appendChild(row);
+        var row = document.createElement("div");
+        row.className = "row clearfix";
 
-          container.appendChild(anchor);
-        }
+         // サムネイル画像無しは自作投稿ではありえないので。
+        var thumbnail = createThumbnail(entry);
+        if(thumbnail == false) continue;
+        row.appendChild(thumbnail);
+        row.appendChild(createText(entry));
+
+        var anchor = document.createElement("a");
+        anchor.setAttribute("href", entry.link);
+        anchor.appendChild(row);
+
+        container.appendChild(anchor);
+        numEntries--;
       }
     });
   }

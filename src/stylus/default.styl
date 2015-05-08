@@ -24,16 +24,22 @@ recentEntryListLogo(bgColor, borderColor, logoUrl)
 .clearfix
   min-height 0px
 
+//- ベース配色
 //- http://ironodata.info/rgb.php?color=3B3B3B
-blankColor    =  #b3b3b3
-subColor       = #e6e6e6
-accentColorBlue = #30d0cf
-accentColorRed = #f05030
-
 mainColor       = #ffffff
-fontMainColor  = #3b3b3b
-mainColorR        = #3b3b3b
-fontMainColorR   = #fff
+fontMainColor   = #3b3b3b
+mainColorR      = #3b3b3b
+fontMainColorR  = #fff
+blankColor      =  #b3b3b3
+subColor        = #e6e6e6
+
+
+//- アクセント配色
+//- http://ironodata.info/rgb.php?color=30D0CF
+//- blue-red, blue-brown が基本
+accentColorBlue  = #30d0cf
+accentColorRed   = #d13081
+accentColorBrown = #D18130
 
 fontFamily = "メイリオ","Meiryo",Verdana,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Osaka",sans-serif
 contentWidth = 1040px
@@ -110,23 +116,27 @@ body
           color fontMainColor
           display block
         a:hover
+          color fontMainColorR
           background-color accentColorBlue
       footer
         background-color mainColor
         pdding 0
       hr
-        border 0
+        border 1px solid mainColorR
       .link_list
         float left
-        recentEntryListLogo(mainColor, blankColor, "")
+        recentEntryListLogo(mainColor, accentColorBrown, "")
         a:hover
-          background-color accentColorRed
+          color fontMainColorR
+          background-color accentColorBrown
         .table
           .row
-            padding .2em .3em .2em 2em
+            .text
+              padding .2em .3em .2em 2em
       #tumblrfeed
         recentEntryListLogo(accentColorRed, accentColorRed, "http://blog-imgs-78.fc2.com/p/s/o/pso2tasy/tumblr_logo_white_24.png")
         a:hover
+          color fontMainColorR
           background-color accentColorRed
       .recent_entry_list
         float left
@@ -289,17 +299,20 @@ body
           color accentColorBlue
         a:hover
           color accentColorRed
+          font-size 1.2em
         hr
           border 0
-          //- height: 1px;
-          //- width 100%
-          //- background-image linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0))
         .link_list, .category_list, .archive
           float left
           .table
             .row
+              height 1.5em
               margin .5em 0
-              padding-left 1em
+              .text
+                overflow hidden
+                white-space nowrap
+                text-overflow ellipsis
+                padding-left 1em
         .profile
           float left
           .table

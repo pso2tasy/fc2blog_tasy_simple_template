@@ -73,11 +73,13 @@ script#tumblrfeed_script(type="text/javascript").
     var imgsrc = entry.content.match(/src="(.*?)"/im);
     var container = document.createElement("div");
     container.className = "thumbnail";
-    if(Array.isArray(imgsrc)) {
-      var thumbimg = document.createElement("img");
-      thumbimg.setAttribute("src", imgsrc[1]);
-      container.appendChild(thumbimg);
+    if(!Array.isArray(imgsrc)) {
+      return false;
     }
+    var thumbimg = document.createElement("img");
+    thumbimg.setAttribute("src", imgsrc[1]);
+    container.appendChild(thumbimg);
+
     return container;
   };
   var createText = function(entry) {
@@ -85,7 +87,7 @@ script#tumblrfeed_script(type="text/javascript").
     text.className = "text";
     
     var date = document.createElement("div");
-    date.className = "meta color_font_main";
+    date.className = "meta";
     date.innerHTML = createDate(entry);
     text.appendChild(date);
 

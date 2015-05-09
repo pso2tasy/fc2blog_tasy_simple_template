@@ -10,10 +10,17 @@ script#tumblrfeed_script(type="text/javascript").
   //APIのモジュールを読み込み
   google.load("feeds", "1");
             
+  var tumblrfeed = {};
+  tumblrfeed.config = {
+    feedUrl : "http://pso2tasy.tumblr.com/rss",
+    numEntries : 5, //エントリの表示数の設定
+    expirationDate : 30 // 何日以内のものを読み込むか
+  };
+  tumblrfeed.dom = {};
   var initialize = function() {
-    var feedUrl = "http://pso2tasy.tumblr.com/rss";
-    var numEntries = 5; //エントリの表示数の設定
-    var expirationDate = 30; // 何日以内のものを読み込むか
+    var feedUrl        = tumblrfeed.config.feedUrl;
+    var numEntries     = tumblrfeed.config.numEntries;
+    var expirationDate = tumblrfeed.config.expirationDate;
 
     var now = new Date().getTime();
     var feed = new google.feeds.Feed(feedUrl + "?" + parseInt(now / 600 / 1000).toString());// 600秒ごとに違うURLにすることでブラウザキャッシュを回避
@@ -50,8 +57,11 @@ script#tumblrfeed_script(type="text/javascript").
         anchor.setAttribute("href", entry.link);
         anchor.appendChild(row);
 
-        container.appendChild(anchor);
+        tumblrfeed.dom.push(anchor);
         numEntries--;
+      }
+      for (var i = 0; i < tumblrfeed.dom.length; i++) {
+        container.appendChild(tumblerfeed.dom[i]);
       }
     });
   }

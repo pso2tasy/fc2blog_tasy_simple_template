@@ -41,7 +41,7 @@ script#tumblrfeed_script(type="text/javascript").
         if(now - pdate.getTime() > 1000 * 60 * 60 * 24 * expirationDate) break;
     
         // 英数字+":"のみの行が一行目の場合は、リブログの可能性が高いので。
-        if(Array.isArray(entry.title.match(/[a-z]+[a-z0-9]*?:\n/i))) continue;
+        if(Array.isArray(entry.title.match(/^[a-z][a-z_0-9]*:/i))) continue;
 
         var row = document.createElement("div");
         row.className = "row clearfix";

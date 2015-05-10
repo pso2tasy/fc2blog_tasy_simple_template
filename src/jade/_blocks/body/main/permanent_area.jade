@@ -27,13 +27,13 @@ article.entry
   footer
     nav
       // nextentry
-      .next_entry_link
+      .older_entry_link
         a(href!="<%nextentry_url>") <%nextentry_title>
-        | &nbsp;:Next Entry 
+        | &nbsp;:Older Entry 
       // /nextentry
       // preventry
-      .prev_entry_link
-        | Previous Entry:&nbsp;
+      .newer_entry_link
+        | Newer Entry:&nbsp;
         a(href!="<%preventry_url>") <%preventry_title>
       // /preventry
       hr.clearfix

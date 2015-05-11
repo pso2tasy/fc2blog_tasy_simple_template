@@ -1,7 +1,7 @@
 //- topentry内で呼び出すこと
 section.comment#comment
   //comment
-  .body
+  .body(id!="comment-<%comment_no>")
     <%comment_body>
   footer
     | <%comment_year>/<%comment_month>/<%comment_day> <%comment_hour>:<%comment_minute> : <%comment_name> <%comment_url+str>
@@ -10,7 +10,7 @@ section.comment#comment
     // /comment_edit
   // /comment
 
-  // allow_comment
+// allow_comment
 section.comment_form
   form#comment_form(action!="http://pso2tasy.blog.fc2.com/blog-entry-<%pno>.html" method="post" name="comment_form")
     input(name="comment[no]", value!="<%pno>", type="hidden")
@@ -44,5 +44,5 @@ section.comment_form
       
       input.submit(value="送信", type="submit")
   
-  // /allow_comment
+// /allow_comment
 

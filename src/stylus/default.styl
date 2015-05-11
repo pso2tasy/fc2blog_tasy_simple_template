@@ -27,11 +27,13 @@ recentEntryListLogo(bgColor, borderColor, logoUrl)
 //- ベース配色
 //- http://ironodata.info/rgb.php?color=3B3B3B
 mainColor       = #ffffff
-fontMainColor   = #3b3b3b
+fontMainColor   = #3b3b3b //- rgb595959
 mainColorR      = #3b3b3b
 fontMainColorR  = #fff
-blankColor      =  #b3b3b3
+//- blankColor      = #b3b3b3 //- rgb179179179
+blankColor      = #494949 //- rgb179179179
 subColor        = #e6e6e6
+footerBGColor   = #1a1a1a
 
 
 //- アクセント配色
@@ -92,10 +94,10 @@ body
     //- container footer
     footer
       padding 1em ((contentWidth+(-1 * mainWidth))/2)
-      background-color mainColorR
-      color            fontMainColorR
+      background-color footerBGColor
+      color            blankColor
       a
-        color            fontMainColorR
+        color          blankColor
       .copyright
         margin 0 0 1em 0
         a
@@ -295,18 +297,20 @@ body
     //- container aside
     aside
       padding 2em ((contentWidth+(-1 * mainWidth))/2) 1em ((contentWidth+(-1 * mainWidth))/2)
-      background-color subColor
+      background-color mainColorR
+      color fontMainColorR
+      font-size 1.1em
       .widget_area
         .widget
           width (widgetWidth/2)
-          margin 0 1em 0 0
+          margin 0 .9em 0 0
           h1
-            background-color subColor
+            background-color mainColorR
+            color  fontMainColorR
         a
-          color accentColorBlue
+          color subColor
         a:hover
-          color accentColorRed
-          font-size 1.2em
+          color accentColorBlue
         hr
           border 0
         .link_list, .category_list, .archive
@@ -324,25 +328,27 @@ body
           float left
           .row
              padding-left 1em
-          .profile
+          .info
             .table
               .row
                 margin .5em 0
                 .description
                   padding-left 1em
-          .search_form
-            margin-top 1.5em
-            input
-              border mainColorR solid 1px
-            .search_word
-              padding-left .5em
-              background-color subColor
-              width 10em
-            .search_word:focus
-              background-color mainColor
-            .search_submit
-              margin-right .5em
-              padding 0em .5em
+              .search_form
+                input
+                  border 0
+                  background-color mainColorR
+                .search_submit
+                  color fontMainColorR
+                  padding 0
+                  font-size 1em
+                .search_word
+                  border-bottom fontMainColorR solid 1px
+                  margin-left 1em
+                  padding 0 0 0 .5em
+                  width 10em
+                .search_word:focus
+                  background-color mainColor
     #comment_form
       input, textarea 
         border mainColorR solid 1px

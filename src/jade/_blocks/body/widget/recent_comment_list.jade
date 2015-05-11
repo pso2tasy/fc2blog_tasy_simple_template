@@ -1,0 +1,14 @@
+//- 最新コメントリスト
+section.widget.recent_comment_list
+  h1 Recent Blog Comments
+  .table
+    // rcomment
+    a(href!="<%rcomment_link>#comment-<%rcomment_no>") 
+      .row
+        .text
+          .meta
+            <%rcomment_year>/<%rcomment_month>/<%rcomment_day> <%rcomment_name>
+          .title
+            <%rcomment_etitle>
+    // /rcomment
+  footer.clearfix

@@ -1,15 +1,22 @@
 //- プロフィール
-section.widget.profile
-  h1 Profile
-  .table
-    .row
-      .author Author: tasy
-    .row
-      .description PSO2: Ship 8 烏合の衆所属。色々するけど全部中途半端系プレイヤーです。
-    .row
-      .other ブログ以外だとこの辺に居ます
-      .twitter_link
-        a(href="https://twitter.com/pso2tasy") Twitter
-      .tumblr_link
-        a(href="http://pso2tasy.tumblr.com/") Tumblr
+section.widget.bloginfo
+  h1 BlogInfo
+  section.profile
+    .table
+      .row
+        .author Author: tasy
+      .row
+        .description PSO2: Ship 8 烏合の衆所属。色々するけど全部中途半端系プレイヤーです。
+      .row
+        .other ブログ以外だとこの辺に居ます
+        .twitter_link
+          a(href="https://twitter.com/pso2tasy") Twitter
+        .tumblr_link
+          a(href="http://pso2tasy.tumblr.com/") Tumblr
+  section.search
+    .table
+      .row
+        form.search_form(action="./", method="get", name="search_form")
+          input.search_submit(type="submit", value="検索")
+          input.search_word(type="text", name="search")
   footer.clearfix

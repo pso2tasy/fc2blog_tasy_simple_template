@@ -315,12 +315,27 @@ body
                 white-space nowrap
                 text-overflow ellipsis
                 padding-left 1em
-        .profile
+        .bloginfo
           float left
-          .table
-            .row
-              margin .5em 0
-              padding-left 1em
+          .row
+             padding-left 1em
+          .profile
+            .table
+              .row
+                margin .5em 0
+          .search_form
+            margin-top 1.5em
+            input
+              border mainColorR solid 1px
+            .search_word
+              padding-left .5em
+              background-color subColor
+              width 10em
+            .search_word:focus
+              background-color mainColor
+            .search_submit
+              margin-right .5em
+              padding 0em .5em
     #comment_form
       input, textarea 
         border mainColorR solid 1px

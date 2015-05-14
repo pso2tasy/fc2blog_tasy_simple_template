@@ -92,7 +92,7 @@ body
       a:hover
         color accentColorRed
     //- container footer
-    footer
+    >footer
       padding 1em ((contentWidth+(-1 * mainWidth))/2)
       background-color footerBGColor
       color            blankColor
@@ -252,30 +252,32 @@ body
             text-align right
             display    inline-block
             width      6em
-      .comment
+      .comment_list
         background-color mainColor
         color fontMainColor
-        padding 1em ((contentWidth+(-1 * mainWidth))/2)
-        .body
-          font-size 1.3em
-          line-height 1.6
-        .body:after
-          margin .5em 0 0 0
-          content ""
-          height 1px
-          display block
-          width 100%
-          background-image linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0), rgba(0,0,0,0))
-        footer
-          color fontMainColor
-          text-align left
-          padding 0
-          margin-bottom 2em
+        .comment
+          padding 1em ((contentWidth+(-1 * mainWidth))/2)
+          .body
+            font-size 1.3em
+            line-height 1.6
+          .body:after
+            margin .5em 0 0 0
+            content ""
+            height 1px
+            display block
+            width 100%
+            background-image linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0), rgba(0,0,0,0))
+          footer
+            color fontMainColor
+            text-align left
+            padding 0 0 1em 0
+        .comment:nth-child(2n)
+          background-color subColor
       .comment_form
         background-color mainColor
         padding 1em ((contentWidth+(-1 * mainWidth))/2)
         font-size 1.3em
-      footer
+      >footer
         background-color mainColor
         color            fontMainColor
         padding 1em ((contentWidth+(-1 * mainWidth))/2) 3em ((contentWidth+(-1 * mainWidth))/2)

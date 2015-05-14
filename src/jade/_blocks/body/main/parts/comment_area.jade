@@ -1,13 +1,14 @@
 //- topentry内で呼び出すこと
-section.comment#comment
+section.comment_list#comment_list
   //comment
-  .body(id!="comment-<%comment_no>")
-    <%comment_body>
-  footer
-    | <%comment_year>/<%comment_month>/<%comment_day> <%comment_hour>:<%comment_minute> : <%comment_name> <%comment_url+str>
-    // comment_edit
-    a(href!="<%comment_edit_link>") Edit
-    // /comment_edit
+  .comment(id!="comment-<%comment_no>")
+    .body
+      <%comment_body>
+    footer
+      | <%comment_year>/<%comment_month>/<%comment_day> <%comment_hour>:<%comment_minute> : <%comment_name> <%comment_url+str>
+      // comment_edit
+      a(href!="<%comment_edit_link>") Edit
+      // /comment_edit
   // /comment
 
 // allow_comment

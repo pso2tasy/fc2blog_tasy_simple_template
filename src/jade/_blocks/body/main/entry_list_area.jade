@@ -14,3 +14,13 @@ article.entry_list
           .meta.color_font_main Category: <%topentry_category>
     // /topentry
   footer.clearfix.both
+    nav
+      // prevpage
+      .previous_page_link
+        a(href!="<%prevpage_url>") Previous Page
+      // /prevpage
+      // nextpage
+      .next_page_link
+        a(href!="<%nextpage_url>") Next Page
+      // /nextpage
+      hr.clearfix

@@ -12,7 +12,7 @@ var config = {
   jade: {
     src: ['src/jade/**/*.jade', '!src/jade/**/_*/**/*.jade'],
     dest: 'public/',
-    options: {pretty:true},
+    options: {pretty:false},
     isCompile: false
   },
   stylus: {

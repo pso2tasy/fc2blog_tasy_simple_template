@@ -291,7 +291,7 @@ body
             text-align left
             padding 0 0 1em 0
         .comment:nth-child(2n)
-          background-color subColor
+          background-color mainColorDark
       .comment_form
         background-color mainColor
         padding 1em ((contentWidth+(-1 * mainWidth))/2)
@@ -309,10 +309,18 @@ body
           font-size 130%
           text-align center
           line-height 1
+          .older_entry_link, .newer_entry_link
+            overflow hidden
+            white-space nowrap
+            text-overflow ellipsis
           .older_entry_link
             float left
+            text-align left
+            width (mainWidth/2)
           .newer_entry_link
             float right
+            text-align right
+            width (mainWidth/2)
           hr
             border 0
     //- container aside
@@ -407,6 +415,20 @@ body
       width mainWidth
       footer
         background-color mainColor
+        nav
+          padding 1em
+          text-align center
+          line-height 1
+          .previous_page_link, .next_page_link
+            overflow hidden
+            white-space nowrap
+            text-overflow  ellipsis
+          .previous_page_link
+            float left
+          .next_page_link
+            float right
+          hr
+            border 0
       .table
         .row
           margin .5em 0
@@ -419,6 +441,8 @@ body
             width  300px
             height 200px
           .text
+            width 600px
+            overflow hidden
             line-height 1.6
             padding-left 1em
             float left

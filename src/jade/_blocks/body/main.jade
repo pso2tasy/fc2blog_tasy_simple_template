@@ -4,15 +4,19 @@ main
   include main/edit_area
 
   // date_area
+  - title = 'Monthly Archives: <span class="brown"><%now_year>/<%now_month></span>'
   include main/entry_list_area
   // /date_area
   // category_area
+  - title = 'Category: <span class="brown"><%sub_title></span>'
   include main/entry_list_area
   // /category_area
   // search_area
+  - title = 'Results for "<span class="brown"><%search_word></span>"'
   include main/entry_list_area
   // /search_area
   // tag_area
+  - title = 'Tag: <span class="brown"><%tag_word></span>'
   include main/entry_list_area
   // /tag_area
   

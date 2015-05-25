@@ -12,20 +12,22 @@ script#tumblrfeed_script(type="text/javascript").
             
   var tumblrfeed = {};
   tumblrfeed.config = {
-    feedUrl : "http://pso2tasy.tumblr.com/rss",
-    numEntries : 5, //エントリの表示数の設定
-    expirationDate : 30 // 何日以内のものを読み込むか
+    feedUrl        : "http://pso2tasy.tumblr.com/rss",
+    lines          : 5,  //エントリの表示数の設定
+    numEntries     : 20, //エントリの読み込み数
+    expirationDate : 30, // 何日以内のものを読み込むか
+    intervals      : 600 * 1000 // rssを再読み込みする間隔（ミリ秒）
   };
   tumblrfeed.dom = [];
   var initialize = function() {
     var feedUrl        = tumblrfeed.config.feedUrl;
-    var numEntries     = tumblrfeed.config.numEntries;
+    var lines          = tumblrfeed.config.lines;
     var expirationDate = tumblrfeed.config.expirationDate;
 
-    var now = new Date().getTime();
-    var feed = new google.feeds.Feed(feedUrl + "?" + parseInt(now / 600 / 1000).toString());// 600秒ごとに違うURLにすることでブラウザキャッシュを回避
+    var now  = new Date().getTime();
+    var feed = new google.feeds.Feed(feedUrl + "?" + parseInt(now / tumblrfeed.config.intervals).toString());
   
-    feed.setNumEntries(numEntries * 2);
+    feed.setNumEntries(tumblrfeed.config.numEntries);
   
     //関数の定義
     feed.load(function(result) {
@@ -33,7 +35,7 @@ script#tumblrfeed_script(type="text/javascript").
         return;
       }
       //読み込みが成功したときの処理
-      for (var i = 0; i < result.feed.entries.length && numEntries > 0; i++) {
+      for (var i = 0; i < result.feed.entries.length && lines > tumblrfeed.dom.length; i++) {
         var entry = result.feed.entries[i];
 
         //日付の判定
@@ -57,7 +59,6 @@ script#tumblrfeed_script(type="text/javascript").
         anchor.appendChild(row);
 
         tumblrfeed.dom.push(anchor);
-        numEntries--;
       }
       for (var i = 0; i < tumblrfeed.dom.length; i++) {
         var container = document.getElementById("feed");

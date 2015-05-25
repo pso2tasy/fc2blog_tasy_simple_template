@@ -12,11 +12,11 @@ script#tumblrfeed_script(type="text/javascript").
             
   var tumblrfeed = {};
   tumblrfeed.config = {
-    feedUrl        : "http://pso2tasy.tumblr.com/rss",
-    lines          : 5,  //エントリの表示数の設定
+    feedUrl        : "#{tumblrBlogUrl}/rss",
+    lines          : #{tumblrRecentEntries},  //エントリの表示数の設定
     numEntries     : 20, //エントリの読み込み数
-    expirationDate : 30, // 何日以内のものを読み込むか
-    intervals      : 600 * 1000 // rssを再読み込みする間隔（ミリ秒）
+    expirationDate : #{tumblrExpirationDate}, // 何日以内のものを読み込むか
+    intervals      : #{tumblrIntervals} * 1000 // rssを再読み込みする間隔（ミリ秒）
   };
   tumblrfeed.dom = [];
   var initialize = function() {

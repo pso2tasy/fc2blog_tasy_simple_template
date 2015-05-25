@@ -4,9 +4,9 @@ section.widget.bloginfo
   section.info
     .table
       .row
-        .author Author: tasy
+        .author Author: #{author}
       .row
-        .description PSO2 Ship 8 烏合の衆所属。色々するけど全部中途半端系プレイヤーです。
+        .description #{description}
 
       form.search_form(action="./", method="get", name="search_form")
         .row
@@ -25,8 +25,10 @@ section.widget.bloginfo
         .other Other sites:
       .row
         .description
-          .twitter_link
-            a(href="https://twitter.com/pso2tasy") Twitter
-          .tumblr_link
-            a(href="http://pso2tasy.tumblr.com/") Tumblr
+          if twitterId
+            .twitter_link
+              a(href="https://twitter.com/#{twitterId}") Twitter
+          if tumblrBlogUrl
+            .tumblr_link
+              a(href="#{tumblrBlogUrl}") Tumblr
   footer.clearfix

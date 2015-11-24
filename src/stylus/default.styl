@@ -61,21 +61,12 @@ widgetWidth = 460px
   color accentColorRed
 .brown
   color accentColorBrown
+.pink
+  color #ff9f9f
 
 q, blockquote
   font-family fontFamilyQuote
   font-style  italic
-blockquote
-  p
-    font-family fontFamilyQuote
-    font-style  italic
-    margin:0
-    padding 0.2em
-  .origin // 引用もとのリンクに設定 p.origin a
-    font-family fontFamily
-    margin  0
-    padding 0.2em
-    text-align right
 
 s
   color subColor
@@ -133,7 +124,7 @@ body
         font-size 150%
       footer
         padding 0
-            
+
     //- 記事中で用いるもの
     .activity_list
       font-size 130%
@@ -236,6 +227,17 @@ body
           p
             margin-bottom 2em
             line-height 1.6
+          blockquote
+            p
+              font-family fontFamilyQuote
+              font-style  italic
+              margin:0
+              padding 0.2em 0
+            .origin // 引用もとのリンクに設定 p.origin a
+              font-family fontFamily
+              margin  0
+              padding 0.2em 0
+              text-align right
           div.obj
             margin-bottom 1em
             width auto
@@ -289,7 +291,7 @@ body
               padding 0.3em 0.5em
             th
               background-color mainColorDark
-          .notes 
+          .notes
             color subColor
           dl
             margin-bottom 2em
@@ -421,7 +423,7 @@ body
                 .search_word:focus
                   background-color mainColor
     #comment_form
-      input, textarea 
+      input, textarea
         border mainColorR solid 1px
       .name
         width 10em

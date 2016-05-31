@@ -28,6 +28,8 @@ recentEntryListLogo(bgColor, borderColor, logoUrl)
 //- http://ironodata.info/rgb.php?color=3B3B3B
 mainColor       = #ffffff
 fontMainColor   = #3b3b3b //- rgb595959
+fontStrongColor   = #000000
+
 mainColorR      = #3b3b3b
 fontMainColorR  = #fff
 mainColorDark   = #f6f6f6
@@ -71,6 +73,9 @@ q, blockquote
 s
   color subColor
 
+strong
+  font-weight bold
+  color fontStrongColor
 body
   background-color blankColor
   color            fontMainColor
@@ -252,14 +257,14 @@ body
               margin  0
               padding 0.2em 0
               text-align right
-          div.obj
+          div.obj, figure
             margin-bottom 1em
             width auto
             img
               max-width  mainWidth
               max-height mainWidth
               vertical-align bottom
-            p
+            p, figcaption
               background-color mainColorR
               color fontMainColorR
               padding 0.2em 0 0.5em 1em

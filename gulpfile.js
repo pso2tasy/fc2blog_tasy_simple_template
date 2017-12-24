@@ -1,6 +1,4 @@
 var gulp = require('gulp');
-var autoRestart = require('gulp-auto-restart');
-autoRestart({'task': 'watch'});
 
 // Default
 // ----------------------------------------------------------------------------

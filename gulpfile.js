@@ -7,8 +7,8 @@ gulp.task('default', []);
 // settings
 // ----------------------------------------------------------------------------
 var config = {
-  jade: {
-    src: ['src/jade/**/*.jade', '!src/jade/**/_*/**/*.jade'],
+  pug: {
+    src: ['src/pug/**/*.pug', '!src/pug/**/_*/**/*.pug'],
     dest: 'public/',
     options: {pretty:false},
     isCompile: false
@@ -41,9 +41,9 @@ var fc2blogKeywords = function() {
 // ----------------------------------------------------------------------------
 var replace = require('gulp-replace-task');
 var compile = {
-  jade: function(config, replacements) {
+  pug: function(config, replacements) {
     gulp.src(config.src)
-      .pipe(jade(config.options))
+      .pipe(pug(config.options))
       .pipe(replace({patterns: replacements}))
       .pipe(gulp.dest(config.dest));
   },
@@ -62,9 +62,9 @@ gulp.task('stylus', function() {
   compile.stylus(config.stylus, data.replacements.stylus)
 });
 
-var jade = require('gulp-jade');
-gulp.task('jade', function() {
-  compile.jade(config.jade, new fc2blogKeywords().getReplacement(config.jade.isCompile));
+var pug = require('gulp-pug');
+gulp.task('pug', function() {
+  compile.pug(config.pug, new fc2blogKeywords().getReplacement(config.pug.isCompile));
 });
 
 var browserSync = require('browser-sync');
@@ -80,18 +80,18 @@ var browserSyncConfig = {
 
 // Complex tasks
 // ----------------------------------------------------------------------------
-gulp.task('watch', ['jade', 'stylus'], function() {
+gulp.task('watch', ['pug', 'stylus'], function() {
   var args = require('minimist')(process.argv.slice(2));
   if(args.restart) {
     browserSyncConfig.open = false;
   }
   browserSync(browserSyncConfig);
-  gulp.watch('src/**/*.jade', ['jade', browserSync.reload]);
+  gulp.watch('src/**/*.pug', ['pug', browserSync.reload]);
   gulp.watch('src/stylus/**/*.styl', ['stylus', browserSync.reload]);
 });
 
 gulp.task('compile', [], function() {
-  config.jade.isCompile = true;
-  compile.jade(config.jade, new fc2blogKeywords().getReplacement(config.jade.isCompile));
+  config.pug.isCompile = true;
+  compile.pug(config.pug, new fc2blogKeywords().getReplacement(config.pug.isCompile));
   compile.stylus(config.stylus, []);
 });

@@ -1,0 +1,31 @@
+//- すべてのページ
+//- ---------------------------------------------------------------------------
+meta(name="og:type", content="blog")
+// myimage
+meta(name="og:site_name", content!="<%blog_name>")
+// /myimage
+
+//- twittercard
+meta(name="twitter:card", content="summary")
+meta(name="twitter:site", content="@#{twitterId}")
+//- meta(name="twitter:creator", content="@pso2tasy")効かない？
+//- meta(name="twitter:domain",  content!="pso2tasy.blog.fc2.com")効かない？
+
+//- 個別ページ
+//- ---------------------------------------------------------------------------
+// index_area
+meta(name="og:image", content!="<%image>")
+meta(name="og:title",       content!="<%blog_name>")
+meta(name="og:url",         content!="<%url>")
+meta(name="og:description", content!="<%introduction>")
+// /index_area
+
+// permanent_area
+//- meta(name="og:image", content!="") ページ別のものを出す機能が無いので
+meta(name="og:title",       content!="<%sub_title>")
+meta(name="og:url",         content!="<%url>blog-entry-<%pno>.html")
+// topentry
+meta(name="og:description", content!="<%topentry_discription>")
+// /topentry
+// /permanent_area
+

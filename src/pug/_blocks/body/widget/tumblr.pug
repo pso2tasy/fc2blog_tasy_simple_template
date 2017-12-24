@@ -1,0 +1,113 @@
+//- tumblr
+script(type="text/javascript", src="http://www.google.com/jsapi")
+//- script(type="text/javascript", src="http://blog-imgs-78.fc2.com/p/s/o/pso2tasy/tumblrfeed.js")
+#tumblrfeed.widget.recent_entry_list
+  h1 Recent Tumblr Entries
+  #feed.table
+  footer.clearfix
+
+script#tumblrfeed_script(type="text/javascript").
+  //APIのモジュールを読み込み
+  google.load("feeds", "1");
+            
+  var tumblrfeed = {};
+  tumblrfeed.config = {
+    feedUrl        : "#{tumblrBlogUrl}/rss",
+    lines          : #{tumblrRecentEntries},  //エントリの表示数の設定
+    numEntries     : 20, //エントリの読み込み数
+    expirationDate : #{tumblrExpirationDate}, // 何日以内のものを読み込むか
+    intervals      : #{tumblrIntervals} * 1000 // rssを再読み込みする間隔（ミリ秒）
+  };
+  tumblrfeed.dom = [];
+  var initialize = function() {
+    var feedUrl        = tumblrfeed.config.feedUrl;
+    var lines          = tumblrfeed.config.lines;
+    var expirationDate = tumblrfeed.config.expirationDate;
+
+    var now  = new Date().getTime();
+    var feed = new google.feeds.Feed(feedUrl + "?" + parseInt(now / tumblrfeed.config.intervals).toString());
+  
+    feed.setNumEntries(tumblrfeed.config.numEntries);
+  
+    //関数の定義
+    feed.load(function(result) {
+      if (result.error) {
+        return;
+      }
+      //読み込みが成功したときの処理
+      for (var i = 0; i < result.feed.entries.length && lines > tumblrfeed.dom.length; i++) {
+        var entry = result.feed.entries[i];
+
+        //日付の判定
+        var pdate = new Date(entry.publishedDate);
+        if(now - pdate.getTime() > 1000 * 60 * 60 * 24 * expirationDate) break;
+    
+        // 英数字+":"のみの行が一行目の場合は、リブログの可能性が高いので。
+        if(Array.isArray(entry.title.match(/^[a-z][a-z_\-0-9]*:/i))) continue;
+
+        var row = document.createElement("div");
+        row.className = "row clearfix";
+
+         // サムネイル画像無しは自作投稿ではありえないので。
+        var thumbnail = createThumbnail(entry);
+        if(thumbnail == false) continue;
+        row.appendChild(thumbnail);
+        row.appendChild(createText(entry));
+
+        var anchor = document.createElement("a");
+        anchor.setAttribute("href", entry.link);
+        anchor.appendChild(row);
+
+        tumblrfeed.dom.push(anchor);
+      }
+      for (var i = 0; i < tumblrfeed.dom.length; i++) {
+        var container = document.getElementById("feed");
+        container.appendChild(tumblrfeed.dom[i]);
+      }
+    });
+  }
+  var createDate = function(entry) {
+    var pdate = new Date(entry.publishedDate); //Dateクラス
+  
+    var pyear  = pdate.getFullYear();  //年
+    var pmonth = pdate.getMonth() + 1; //月
+    var pday   = pdate.getDate();      //日
+  
+    //日付を2桁表示に変更
+    if (pyear < 2000) pyear += 1900;
+    if (pmonth < 10) { "0" + pmonth;}
+    if (pday < 10) {pday = "0" + pday;}
+  
+    return pyear + "/" + pmonth + "/" + pday + " ";
+  };
+  var createThumbnail = function(entry) {
+    var imgsrc = entry.content.match(/src="(.*?)"/im);
+    var container = document.createElement("div");
+    container.className = "thumbnail";
+    if(!Array.isArray(imgsrc)) {
+      return false;
+    }
+    var thumbimg = document.createElement("img");
+    thumbimg.setAttribute("src", imgsrc[1]);
+    container.appendChild(thumbimg);
+
+    return container;
+  };
+  var createText = function(entry) {
+    var text = document.createElement("div");
+    text.className = "text";
+    
+    var date = document.createElement("div");
+    date.className = "meta";
+    date.innerHTML = createDate(entry);
+    text.appendChild(date);
+
+    var title = document.createElement("div");
+    title.className = "title";
+    title.innerHTML = entry.title;
+    text.appendChild(title);
+
+    return text;
+  };
+  google.setOnLoadCallback(initialize);
+

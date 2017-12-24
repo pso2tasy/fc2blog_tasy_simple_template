@@ -13,11 +13,11 @@
   "devDependencies": {
     "browser-sync": "~2.2.1",
     "gulp": "^3.9.1",
-    "gulp-jade": "^1.1.0",
+    "gulp-pug": "^3.3.0",
     "gulp-replace-task": "^0.1.0",
     "gulp-stylus": "^2.6.0",
-    "jade": "^1.11.0",
     "minimist": "~1.1.0",
+    "pug": "^2.0.0-rc.4",
     "stylus": "^0.50.0"
   }
 }
